@@ -167,7 +167,7 @@ export default function Home() {
                 </div>
             </div>
             <div style={{flex: '1 1 0', alignSelf: 'stretch', background: 'var(--bg-card, white)', boxShadow: '0px 4px 12px -2px rgba(15.30, 15.30, 20.40, 0.08)', overflow: 'hidden', borderRadius: 20, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'flex'}}>
-                <div style={{width: 232, alignSelf: 'stretch', paddingTop: 28, paddingBottom: 28, paddingLeft: 28, paddingRight: 8, overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
+                <div style={{flex: '1 1 0', minWidth: 0, alignSelf: 'stretch', paddingTop: 28, paddingBottom: 28, paddingLeft: 28, paddingRight: 8, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
                     <div style={{overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex'}}>
                         <div data-name="garage" style={{width: 22, height: 22, position: 'relative'}}>
                             <div style={{width: 16.50, height: 5.50, left: 2.75, top: 3.67, position: 'absolute', outline: '1.90px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.95px'}} />
@@ -183,32 +183,32 @@ export default function Home() {
                         <div style={{width: 120, height: 8, background: 'var(--brand-yellow, #FFD400)', borderRadius: 999}} />
                     </div>
                     <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', textTransform: 'uppercase', lineHeight: '14px', letterSpacing: 0.66, wordWrap: 'break-word'}}>Customizations</div>
-                    <div style={{overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'inline-flex'}}>
-                        <div data-state="Unlocked" style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 4.96, display: 'inline-flex'}}>
-                            <div style={{width: 59.52, height: 59.52, background: 'var(--bg-card, white)', overflow: 'hidden', borderRadius: 9.92, outline: '0.62px var(--border-strong, #C7C7CC) solid', outlineOffset: '-0.62px', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
-                                <div data-name="star" style={{width: 24.80, height: 24.80, position: 'relative'}}>
+                    <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 10, display: 'flex'}}>
+                        <div data-state="Unlocked" style={{flex: '1 1 40px', minWidth: 0, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 6, display: 'flex'}}>
+                            <div style={{alignSelf: 'stretch', height: 62, background: 'var(--bg-card, white)', overflow: 'hidden', borderRadius: 12, outline: '1px var(--border-strong, #C7C7CC) solid', outlineOffset: '-1px', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                                <div data-name="star" style={{width: 26, height: 26, position: 'relative'}}>
                                     <div style={{width: 17.57, height: 16.84, left: 3.62, top: 3.62, position: 'absolute', outline: '1.18px var(--black-800, #1A1A1A) solid', outlineOffset: '-0.59px'}} />
                                 </div>
                             </div>
-                            <div style={{textAlign: 'center', color: 'var(--text-primary, #1A1A1A)', fontSize: 7.44, fontFamily: 'Inter', fontWeight: '500', lineHeight: '9.92px', letterSpacing: 0.01, wordWrap: 'break-word'}}>Hair</div>
+                            <div style={{alignSelf: 'stretch', textAlign: 'center', color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', letterSpacing: 0.01, wordWrap: 'break-word'}}>Hair</div>
                         </div>
-                        <div data-state="Unlocked" style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 4.96, display: 'inline-flex'}}>
-                            <div style={{width: 59.52, height: 59.52, background: 'var(--bg-card, white)', overflow: 'hidden', borderRadius: 9.92, outline: '0.62px var(--border-strong, #C7C7CC) solid', outlineOffset: '-0.62px', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
-                                <div data-name="heart" style={{width: 24.80, height: 24.80, position: 'relative'}}>
+                        <div data-state="Unlocked" style={{flex: '1 1 40px', minWidth: 0, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 6, display: 'flex'}}>
+                            <div style={{alignSelf: 'stretch', height: 62, background: 'var(--bg-card, white)', overflow: 'hidden', borderRadius: 12, outline: '1px var(--border-strong, #C7C7CC) solid', outlineOffset: '-1px', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                                <div data-name="heart" style={{width: 26, height: 26, position: 'relative'}}>
                                     <div style={{width: 16.24, height: 15.50, left: 2.21, top: 5.17, position: 'absolute', outline: '1.18px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.59px'}} />
                                 </div>
                             </div>
-                            <div style={{textAlign: 'center', color: 'var(--text-primary, #1A1A1A)', fontSize: 7.44, fontFamily: 'Inter', fontWeight: '500', lineHeight: '9.92px', letterSpacing: 0.01, wordWrap: 'break-word'}}>Jacket</div>
+                            <div style={{alignSelf: 'stretch', textAlign: 'center', color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', letterSpacing: 0.01, wordWrap: 'break-word'}}>Jacket</div>
                         </div>
-                        <div data-state="Unlocked" style={{flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 4.96, display: 'inline-flex'}}>
-                            <div style={{width: 59.52, height: 59.52, background: 'var(--bg-card, white)', overflow: 'hidden', borderRadius: 9.92, outline: '0.62px var(--border-strong, #C7C7CC) solid', outlineOffset: '-0.62px', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>
-                                <div data-name="target" style={{width: 24.80, height: 24.80, position: 'relative'}}>
+                        <div data-state="Unlocked" style={{flex: '1 1 40px', minWidth: 0, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', gap: 6, display: 'flex'}}>
+                            <div style={{alignSelf: 'stretch', height: 62, background: 'var(--bg-card, white)', overflow: 'hidden', borderRadius: 12, outline: '1px var(--border-strong, #C7C7CC) solid', outlineOffset: '-1px', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                                <div data-name="target" style={{width: 26, height: 26, position: 'relative'}}>
                                     <div style={{width: 17.57, height: 17.57, left: 3.62, top: 3.62, position: 'absolute', outline: '1.18px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.59px'}} />
                                     <div style={{width: 9.92, height: 9.92, left: 7.44, top: 7.44, position: 'absolute', outline: '1.18px var(--black-800, #1A1A1A) solid', outlineOffset: '-0.59px'}} />
                                     <div style={{width: 2.89, height: 2.89, left: 10.95, top: 10.95, position: 'absolute', outline: '1.18px var(--black-800, #1A1A1A) solid', outlineOffset: '-0.59px'}} />
                                 </div>
                             </div>
-                            <div style={{textAlign: 'center', color: 'var(--text-primary, #1A1A1A)', fontSize: 7.44, fontFamily: 'Inter', fontWeight: '500', lineHeight: '9.92px', letterSpacing: 0.01, wordWrap: 'break-word'}}>Sneakers</div>
+                            <div style={{alignSelf: 'stretch', textAlign: 'center', color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', letterSpacing: 0.01, wordWrap: 'break-word'}}>Sneakers</div>
                         </div>
                     </div>
                     <div style={{width: 100, flex: '1 1 0'}} />
@@ -219,7 +219,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div style={{width: 200, alignSelf: 'stretch', position: 'relative', background: 'linear-gradient(180deg, #F7F7FA 0%, #E5E5EB 100%)', overflow: 'hidden', justifyContent: 'center', alignItems: 'flex-end', display: 'flex'}}>
+                <div style={{width: 200, flexShrink: 0, marginLeft: 'auto', alignSelf: 'stretch', position: 'relative', background: 'linear-gradient(180deg, #F7F7FA 0%, #E5E5EB 100%)', overflow: 'hidden', justifyContent: 'center', alignItems: 'flex-end', display: 'flex'}}>
                     <div style={{width: 150, height: 38, left: 25, top: 344, position: 'absolute', opacity: 0.90, background: 'var(--black-800, #1A1A1A)', borderRadius: 9999}} />
                     <div style={{width: 150, height: 38, left: 25, top: 340, position: 'absolute', borderRadius: 9999, border: '3px var(--brand-yellow, #FFD400) solid'}} />
                     <div data-outfit="Yellow Jacket" style={{width: 188, height: 242, left: 6, top: 140, position: 'absolute'}}>

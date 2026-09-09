@@ -1,4 +1,6 @@
 // Open-source community projects page — styled to match the Figma-export pattern.
+import { Flag } from '../components/graphics';
+
 export default function Projects() {
  return (
 <div style={{width: '100%', height: '100%', background: 'var(--bg-page, #F7F7F8)', overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'flex-start', display: 'inline-flex'}}>
@@ -59,25 +61,16 @@ export default function Projects() {
         </div>
 
         {/* Filter pills */}
-        <div style={{alignSelf: 'stretch', overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'inline-flex'}}>
+        <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'inline-flex', flexWrap: 'wrap'}}>
             <div data-state="Selected" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--black, #0A0A0A)', borderRadius: 999, justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
                 <div style={{color: 'var(--text-on-dark, white)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>All countries</div>
             </div>
-            <div data-state="Default" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--bg-card, white)', borderRadius: 999, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
-                <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>Türkiye</div>
-            </div>
-            <div data-state="Default" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--bg-card, white)', borderRadius: 999, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
-                <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>France</div>
-            </div>
-            <div data-state="Default" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--bg-card, white)', borderRadius: 999, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
-                <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>Romania</div>
-            </div>
-            <div data-state="Default" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--bg-card, white)', borderRadius: 999, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
-                <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>India</div>
-            </div>
-            <div data-state="Default" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--bg-card, white)', borderRadius: 999, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
-                <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>Colombia</div>
-            </div>
+            {['Türkiye', 'France', 'Romania', 'India', 'Colombia'].map(country => (
+                <div key={country} data-state="Default" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--bg-card, white)', borderRadius: 999, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
+                    <Flag country={country} width={20} height={14} />
+                    <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>{country}</div>
+                </div>
+            ))}
         </div>
 
         {/* Project grid */}

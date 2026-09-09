@@ -133,6 +133,9 @@ export default function App() {
    if(completed && node==='2,450 XP') return '2,480 XP';
    return node;
   }
+  // Ekranların içine elle konmuş gerçek bileşenler (ör. <Flag/>) olduğu gibi geçer;
+  // sadece export'tan gelen DOM düğümleri dönüştürülür.
+  if(typeof node.type!=='string') return node;
   const {children,style={},...props}=node.props;
   const label=textOf(node);
 
