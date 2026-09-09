@@ -83,8 +83,8 @@ export default function Learning() {
             </div>
             {/* XP badge */}
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--brand-yellow-soft, #FFF6D6)', borderRadius: 999, justifyContent: 'center', alignItems: 'center', gap: 4, display: 'flex'}}>
-              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px #92700A solid', outlineOffset: '-0.75px'}} /></div>
-              <div style={{color: '#92700A', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+15 XP</div>
+              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.75px'}} /></div>
+              <div style={{color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+15 XP</div>
             </div>
             {/* Progress label */}
             <div style={{marginLeft: 'auto', color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px'}}>60% done</div>
@@ -134,8 +134,8 @@ export default function Learning() {
               <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Intermediate</div>
             </div>
             {/* Series indicator */}
-            <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: '#EEF2FF', borderRadius: 999}}>
-              <div style={{color: '#4F46E5', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Part 1 of 2</div>
+            <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--bg-card-alt, #F1F1F3)', borderRadius: 999}}>
+              <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Part 1 of 2</div>
             </div>
             {/* XP earned */}
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--success-soft, #E4F6EE)', borderRadius: 999, justifyContent: 'center', alignItems: 'center', gap: 4, display: 'flex'}}>
@@ -181,12 +181,12 @@ export default function Learning() {
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--bg-card-alt, #F1F1F3)', borderRadius: 999}}>
               <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Intermediate</div>
             </div>
-            <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: '#EEF2FF', borderRadius: 999}}>
-              <div style={{color: '#4F46E5', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Part 2 of 2</div>
+            <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--bg-card-alt, #F1F1F3)', borderRadius: 999}}>
+              <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Part 2 of 2</div>
             </div>
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--brand-yellow-soft, #FFF6D6)', borderRadius: 999, justifyContent: 'center', alignItems: 'center', gap: 4, display: 'flex'}}>
-              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px #92700A solid', outlineOffset: '-0.75px'}} /></div>
-              <div style={{color: '#92700A', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+25 XP</div>
+              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.75px'}} /></div>
+              <div style={{color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+25 XP</div>
             </div>
             <div style={{marginLeft: 'auto', color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px'}}>35% done</div>
           </div>
@@ -228,8 +228,8 @@ export default function Learning() {
               <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Beginner</div>
             </div>
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--brand-yellow-soft, #FFF6D6)', borderRadius: 999, justifyContent: 'center', alignItems: 'center', gap: 4, display: 'flex'}}>
-              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px #92700A solid', outlineOffset: '-0.75px'}} /></div>
-              <div style={{color: '#92700A', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+15 XP</div>
+              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.75px'}} /></div>
+              <div style={{color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+15 XP</div>
             </div>
           </div>
           <div style={{flexDirection: 'column', gap: 6, display: 'flex'}}>
@@ -269,8 +269,8 @@ export default function Learning() {
               <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Intermediate</div>
             </div>
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--brand-yellow-soft, #FFF6D6)', borderRadius: 999, justifyContent: 'center', alignItems: 'center', gap: 4, display: 'flex'}}>
-              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px #92700A solid', outlineOffset: '-0.75px'}} /></div>
-              <div style={{color: '#92700A', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+25 XP</div>
+              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.75px'}} /></div>
+              <div style={{color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+25 XP</div>
             </div>
           </div>
           <div style={{flexDirection: 'column', gap: 6, display: 'flex'}}>
@@ -356,8 +356,8 @@ export default function Learning() {
               <div style={{color: 'var(--text-secondary, #6B6B70)', fontSize: 11, fontFamily: 'Inter', fontWeight: '600', lineHeight: '14px'}}>Beginner</div>
             </div>
             <div style={{paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, background: 'var(--brand-yellow-soft, #FFF6D6)', borderRadius: 999, justifyContent: 'center', alignItems: 'center', gap: 4, display: 'flex'}}>
-              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px #92700A solid', outlineOffset: '-0.75px'}} /></div>
-              <div style={{color: '#92700A', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+15 XP</div>
+              <div data-name="star" style={{width: 12, height: 12, position: 'relative'}}><div style={{width: 7, height: 7, left: 2.5, top: 1.5, position: 'absolute', outline: '1.50px var(--text-primary, #1A1A1A) solid', outlineOffset: '-0.75px'}} /></div>
+              <div style={{color: 'var(--text-primary, #1A1A1A)', fontSize: 11, fontFamily: 'Inter', fontWeight: '700', lineHeight: '14px'}}>+15 XP</div>
             </div>
           </div>
           <div style={{flexDirection: 'column', gap: 6, display: 'flex'}}>

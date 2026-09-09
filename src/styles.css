@@ -1,4 +1,140 @@
-:root{font-family:Inter,Arial,sans-serif;color:#1a1a1a;background:#f7f7f8;font-synthesis:none;--bg-page:#f7f7f8;--bg-sidebar:#0a0a0a;--bg-card:#fff;--bg-card-alt:#f1f1f3;--brand-yellow:#ffd400;--brand-yellow-soft:#fff6d6;--text-primary:#1a1a1a;--text-secondary:#6b6b70;--border-default:#e4e4e7;--border-strong:#c7c7cc;--black:#0a0a0a;--white:#fff}
-*{box-sizing:border-box}body{margin:0}button,a,textarea{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit}button,a{touch-action:manipulation}button{cursor:pointer}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #8b6b00!important;outline-offset:3px!important}button:hover{filter:brightness(.96)}.app-shell{display:flex;min-height:100vh}.sidebar{width:248px;flex-shrink:0;background:#0a0a0a;padding:32px 20px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:10px;color:white;text-decoration:none;font-size:15px;font-weight:800;padding:0 8px 24px}.brand-mark{font-size:40px;line-height:40px;color:#ffd400}.sidebar nav{display:flex;flex-direction:column;gap:6px}.sidebar nav a{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;color:#a5a5ab;text-decoration:none;font-size:14px;font-weight:600;min-height:44px}.sidebar nav a:hover{background:#242424}.sidebar nav a[aria-current]{background:#ffd400;color:#0a0a0a}.sidebar-footer{margin-top:auto;color:#8e8e93;font-size:11px}main{min-width:0;flex:1;overflow:auto;height:100vh}.screen-content{min-width:1120px;min-height:100%;display:flex}.screen-content>div{width:100%;min-width:0}.export-action{border:0;text-align:inherit;background:transparent;font:inherit;flex-shrink:0}.export-action:disabled{cursor:default}textarea{display:block;width:100%;min-width:220px;border:1px solid #c7c7cc;border-radius:8px;background:#fafafa;padding:12px;font:14px/1.5 Inter,Arial,sans-serif;color:#1a1a1a;resize:vertical}.icon-button{border:0;background:transparent;display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:8px}.success-dialog{border:0;padding:0;border-radius:24px;max-width:calc(100vw - 32px);box-shadow:0 20px 60px #0003}.success-dialog::backdrop{background:#0a0a0c8c}.success-dialog>div{max-width:100%}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#171717;color:white;padding:14px 20px;border-radius:12px;box-shadow:0 8px 30px #0003;max-width:min(560px,90vw);font-size:14px;line-height:1.5;opacity:0;pointer-events:none;z-index:30;transition:opacity .15s}.toast.visible{opacity:1}.reward-banner{display:flex;gap:10px;align-items:center;background:#e1f5eb;color:#166747;padding:14px 24px;font-size:14px}.mobile-bar{display:none}.skip-link{position:fixed;top:-100px;left:20px;background:#ffd400;padding:12px;z-index:50;color:#111}.skip-link:focus{top:10px}
-@media(max-width:800px){.mobile-bar{display:flex;align-items:center;justify-content:space-between;background:#0a0a0a;color:white;padding:12px 20px;height:60px}.sidebar{display:none;position:fixed;top:60px;bottom:0;left:0;height:calc(100vh - 60px);z-index:20;box-shadow:10px 0 30px #0003}.sidebar.is-open{display:flex}main{height:calc(100dvh - 60px)}.app-shell{min-height:calc(100vh - 60px)}.screen-content{min-width:1120px}.toast{bottom:12px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* Tasarım token'ları — Figma çıktısındaki var() adlarının tamamı burada tanımlı */
+:root {
+  --bg-page: #F7F7F8;
+  --bg-sidebar: #0A0A0A;
+  --bg-card: #FFFFFF;
+  --bg-card-alt: #F1F1F3;
+  --gray-100: #F1F1F3;
+  --brand-yellow: #FFD400;
+  --brand-yellow-soft: #FFF6D6;
+  --brand-on-yellow: #0A0A0A;
+  --yellow-500: #FFD400;
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B70;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-muted: #8E8E93;
+  --border-default: #E4E4E7;
+  --border-strong: #C7C7CC;
+  --black: #0A0A0A;
+  --black-800: #1A1A1A;
+  --white: #FFFFFF;
+  --success: #1FA971;
+  --success-soft: #E4F6EE;
+
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, a, textarea { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button, a { touch-action: manipulation; }
+button:focus-visible, a:focus-visible, textarea:focus-visible { outline: 3px solid #8B6B00 !important; outline-offset: 3px !important; }
+button:hover { filter: brightness(.96); }
+
+/* ---- Kabuk ---- */
+.app-shell { display: flex; min-height: 100vh; }
+
+/* Sidebar: export'taki 248px / 20px padding / 32px dikey padding değerleriyle aynı */
+.sidebar {
+  width: 248px;
+  flex-shrink: 0;
+  background: var(--bg-sidebar);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+  text-decoration: none;
+  font-family: Archivo, Inter, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 18px;
+  letter-spacing: .3px;
+  padding: 0 0 24px 8px;
+}
+.sidebar nav { display: flex; flex-direction: column; gap: 6px; }
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--text-on-dark-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+}
+.sidebar nav a:hover { background: #242424; color: #D8D8DC; }
+.sidebar nav a[aria-current] { background: var(--brand-yellow); color: var(--black); }
+.sidebar-footer { margin-top: auto; color: var(--text-on-dark-muted); font-size: 11px; font-weight: 500; line-height: 16px; }
+
+main { min-width: 0; flex: 1; overflow: auto; height: 100vh; }
+
+/* Ekran içeriği: 1200px üstünde tasarımın birebir 1440px kadrajı korunur.
+   Altında App.jsx satırları sardırıp sabit genişlikleri esnetir. */
+.screen-content { min-width: 1104px; min-height: 100%; display: flex; align-items: flex-start; }
+.screen-content > div { width: 100%; min-width: 0; height: auto; }
+
+@media (max-width: 1200px) {
+  .screen-content { min-width: 0; }
+}
+
+.export-action { border: 0; text-align: inherit; background: transparent; font: inherit; }
+.export-action:disabled { cursor: default; }
+
+textarea {
+  display: block; width: 100%; min-width: 220px;
+  border: 1px solid var(--border-strong); border-radius: 8px;
+  background: #FAFAFA; padding: 12px;
+  font: 14px/1.5 Inter, Arial, sans-serif; color: var(--text-primary);
+  resize: vertical;
+}
+.icon-button { border: 0; background: transparent; display: inline-flex; align-items: center; justify-content: center; padding: 8px; border-radius: 8px; }
+
+.success-dialog { border: 0; padding: 0; border-radius: 24px; max-width: calc(100vw - 32px); box-shadow: 0 20px 60px #0003; }
+.success-dialog::backdrop { background: #0A0A0C8C; }
+.success-dialog > div { max-width: 100%; }
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #171717; color: #FFF; padding: 14px 20px; border-radius: 12px;
+  box-shadow: 0 8px 30px #0003; max-width: min(560px, 90vw);
+  font-size: 14px; line-height: 1.5; opacity: 0; pointer-events: none; z-index: 30; transition: opacity .15s;
+}
+.toast.visible { opacity: 1; }
+.reward-banner { display: flex; gap: 10px; align-items: center; background: var(--success-soft); color: #166747; padding: 14px 24px; font-size: 14px; }
+
+.mobile-bar { display: none; }
+.skip-link { position: fixed; top: -100px; left: 20px; background: var(--brand-yellow); padding: 12px; z-index: 50; color: #111; }
+.skip-link:focus { top: 10px; }
+
+.mobile-brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: Archivo, Inter, Arial, sans-serif; font-size: 14px; font-weight: 800; letter-spacing: .3px;
+}
+
+@media (max-width: 800px) {
+  .mobile-bar { display: flex; align-items: center; justify-content: space-between; background: var(--bg-sidebar); color: #FFF; padding: 12px 20px; height: 60px; }
+  .sidebar { display: none; position: fixed; top: 60px; bottom: 0; left: 0; height: calc(100vh - 60px); z-index: 20; box-shadow: 10px 0 30px #0003; }
+  .sidebar.is-open { display: flex; }
+  main { height: calc(100dvh - 60px); }
+  .app-shell { min-height: calc(100vh - 60px); }
+  .toast { bottom: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
