@@ -14,7 +14,7 @@ import Projects from './screens/Projects';
 import Learning from './screens/Learning';
 
 const screens = { home: Home, missions: Missions, 'mission-detail': MissionDetail, garage: Garage, community: Community, leaderboard: Leaderboard, events: Events, projects: Projects, learning: Learning };
-const navigation = [['home','Home',HomeIcon],['missions','Missions',Target],['community','Community',Users],['leaderboard','Leaderboard',Trophy],['learning','Learning',BookOpen],['garage','My Garage',Warehouse],['events','Events',Calendar],['projects','Projects',GitFork]];
+const navigation = [['home','Home',HomeIcon],['garage','My Garage',Warehouse],['community','Community',Users],['leaderboard','Leaderboard',Trophy],['learning','Learning',BookOpen],['missions','Missions',Target],['events','Events',Calendar],['projects','Projects',GitFork]];
 const icons = {home:HomeIcon, missions:Target, community:Users, leaderboard:Trophy, garage:Warehouse, events:Calendar, projects:GitFork, learning:BookOpen, star:Star, target:Target, bell:Bell, clock:Clock, play:Play, heart:Heart, chevronRight:ChevronRight, users:Users, trophy:Trophy, sparkle:Sparkles, search:Search, check:Check, arrowLeft:ArrowLeft, copy:Copy, lock:Lock, close:X, plus:Plus, gitfork:GitFork};
 const promptText = 'You are my meeting assistant. Turn the notes below into an action list. For each item give: owner, task, due date. Group by owner. Flag anything with no owner.\n\nNotes: """ <paste your notes here> """';
 const countries = ['Türkiye','France','Romania','India','Colombia'];
