@@ -21,15 +21,12 @@ const people = ['Amélie Laurent','Mert Demir','Ana Popescu','Rahul Nair','Camil
 
 const textOf = node => typeof node === 'string' || typeof node === 'number' ? String(node) : React.isValidElement(node) ? React.Children.toArray(node.props.children).map(textOf).join(' ').trim() : '';
 const getRoute = () => location.hash.slice(1) in screens ? location.hash.slice(1) : 'home';
-// Metinde tek bir ülke/kişi geçiyorsa onu alt ağaca aktarıyoruz; birden fazlaysa
-// üst kapsayıcıdır, yanlış eşleşmemesi için devralınan değer korunur.
+
 const onlyMatch = (list, text, inherited) => {
  const hits = list.filter(item => text.includes(item));
  return hits.length === 1 ? hits[0] : inherited;
 };
 
-// Figma ikonları vektör yerine "outline" verilmiş dikdörtgenler olarak geldi.
-// Lucide ikonuna geçerken tasarımdaki rengi bu outline değerinden okuyoruz.
 const outlineColor = node => {
  for (const child of React.Children.toArray(node.props.children)) {
   const outline = React.isValidElement(child) ? child.props.style?.outline : null;
@@ -50,18 +47,15 @@ const isFlagBox = (style, children) => React.Children.count(children) === 0 && s
 const isAvatarCircle = (style, children) => React.Children.count(children) === 0 && style.borderRadius === 9999
  && typeof style.width === 'number' && style.width >= 24 && style.width <= 44 && style.width === style.height;
 
-/* Export'un sabit piksel düzenini akışkan hale getirir.
-   wide: tasarımın birebir hali. narrow/mobile: satırlar sarar, sabit
-   genişlikler esner, mobilde kenar boşlukları ve başlıklar küçülür. */
 const fluid = (style, breakpoint, rowChild, frozen) => {
  const s = {...style};
  if (s.height === '100%') s.height = 'auto';
- // Export her kutuya overflow:hidden basıyor; sabit yüksekliği olmayanlarda metni kırpıyor.
+
  if (s.overflow === 'hidden' && typeof s.height !== 'number') delete s.overflow;
  if (frozen || breakpoint === 'wide') return s;
 
  if (isRowStyle(s) && (s.gap >= 12 || s.alignSelf === 'stretch')) s.flexWrap = 'wrap';
- // Sabit yüksekliği olan büyük bloklar, satır sardığında içerikle birlikte büyüsün.
+
  if (typeof s.height === 'number' && s.height >= 200) { s.minHeight = s.height; delete s.height; }
  if (rowChild) {
   if (s.flex === '1 1 0') s.flex = '1 1 280px';
@@ -133,8 +127,7 @@ export default function App() {
    if(completed && node==='2,450 XP') return '2,480 XP';
    return node;
   }
-  // Ekranların içine elle konmuş gerçek bileşenler (ör. <Flag/>) olduğu gibi geçer;
-  // sadece export'tan gelen DOM düğümleri dönüştürülür.
+
   if(typeof node.type!=='string') return node;
   const {children,style={},...props}=node.props;
   const label=textOf(node);
@@ -145,21 +138,21 @@ export default function App() {
    if(props['data-name']==='close') return <button key={key} className="icon-button" aria-label="Close reward" onClick={()=>dialog.current.close()}>{icon}</button>;
    return icon;
   }
-  // Export'ta avatar, köşe yarıçapını kaybetmiş dikdörtgen yığınıydı; SVG ile değiştiriliyor.
+
   if(props['data-outfit']) {
    return <Avatar key={key} width={style.width} height={style.height} style={{position:style.position,left:style.left,top:style.top}}/>;
   }
-  // Gri/sarı bayrak placeholder'ları gerçek ülke bayraklarına dönüşüyor.
+
   if(isFlagBox(style,children) && ctx.country) {
    return <Flag key={key} country={ctx.country} width={style.width} height={style.height}/>;
   }
-  // Boş avatar daireleri, yanındaki isimden baş harf alıyor.
+
   if(isAvatarCircle(style,children) && ctx.person) {
    return <span key={key} style={{...style,display:'inline-flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
     <Initials name={ctx.person} size={style.width}/>
    </span>;
   }
-  // Export'taki metin placeholder'ları gerçek form alanı oluyor.
+
   if(label==='Paste your action list here…' || label==='A sentence or two is plenty…') {
    const isResult=label.startsWith('Paste');
    return <textarea key={key} id={isResult?'mission-result':'mission-reflection'} aria-label={isResult?'Your action list':'Reflection'} placeholder={label} value={isResult?result:reflection} onChange={e=>(isResult?setResult:setReflection)(e.target.value)} rows={isResult?5:3}/>;
@@ -182,7 +175,7 @@ export default function App() {
 
  const Screen=screens[route];
  const exported=Screen();
- // Her sayfa kendi sidebar'ını tekrar ediyor; tek ve erişilebilir menü kullanıyoruz.
+
  const content=React.Children.toArray(exported.props.children).slice(1);
  const success=MissionSuccess();
  const successContent=React.Children.toArray(success.props.children).slice(1);

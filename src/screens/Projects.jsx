@@ -1,4 +1,3 @@
-// Open-source community projects page — styled to match the Figma-export pattern.
 import { Flag } from '../components/graphics';
 
 export default function Projects() {
@@ -48,7 +47,6 @@ export default function Projects() {
 
     <div style={{flex: '1 1 0', paddingTop: 40, paddingBottom: 44, paddingLeft: 44, paddingRight: 44, overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'inline-flex'}}>
 
-        {/* Page header */}
         <div style={{alignSelf: 'stretch', overflow: 'hidden', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex'}}>
             <div style={{overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 8, display: 'inline-flex'}}>
                 <div style={{color: 'var(--text-primary, #1A1A1A)', fontSize: 32, fontFamily: 'Archivo', fontWeight: '800', lineHeight: '38px', wordWrap: 'break-word'}}>Projects</div>
@@ -60,7 +58,6 @@ export default function Projects() {
             </div>
         </div>
 
-        {/* Filter pills */}
         <div style={{alignSelf: 'stretch', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'inline-flex', flexWrap: 'wrap'}}>
             <div data-state="Selected" style={{paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'var(--black, #0A0A0A)', borderRadius: 999, justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
                 <div style={{color: 'var(--text-on-dark, white)', fontSize: 14, fontFamily: 'Inter', fontWeight: '600', lineHeight: '18px', letterSpacing: 0.03, wordWrap: 'break-word'}}>All countries</div>
@@ -73,10 +70,8 @@ export default function Projects() {
             ))}
         </div>
 
-        {/* Project grid */}
         <div style={{alignSelf: 'stretch', overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 20, display: 'inline-flex', flexWrap: 'wrap', alignContent: 'flex-start'}}>
 
-            {/* Card 1 */}
             <div style={{width: 520, padding: 24, background: 'var(--bg-card, white)', boxShadow: '0px 4px 12px -2px rgba(15, 15, 20, 0.08)', borderRadius: 16, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
                 <div style={{alignSelf: 'stretch', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex'}}>
                     <div style={{paddingLeft: 10, paddingRight: 10, paddingTop: 4, paddingBottom: 4, background: 'var(--black, #0A0A0A)', borderRadius: 999, justifyContent: 'flex-start', alignItems: 'center', display: 'flex'}}>
@@ -121,7 +116,6 @@ export default function Projects() {
                 </div>
             </div>
 
-            {/* Card 2 */}
             <div style={{width: 520, padding: 24, background: 'var(--bg-card, white)', boxShadow: '0px 4px 12px -2px rgba(15, 15, 20, 0.08)', borderRadius: 16, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
                 <div style={{alignSelf: 'stretch', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex'}}>
                     <div style={{paddingLeft: 10, paddingRight: 10, paddingTop: 4, paddingBottom: 4, background: 'var(--black, #0A0A0A)', borderRadius: 999, justifyContent: 'flex-start', alignItems: 'center', display: 'flex'}}>
@@ -163,7 +157,6 @@ export default function Projects() {
                 </div>
             </div>
 
-            {/* Card 3 */}
             <div style={{width: 520, padding: 24, background: 'var(--bg-card, white)', boxShadow: '0px 4px 12px -2px rgba(15, 15, 20, 0.08)', borderRadius: 16, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
                 <div style={{alignSelf: 'stretch', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex'}}>
                     <div style={{paddingLeft: 10, paddingRight: 10, paddingTop: 4, paddingBottom: 4, background: 'var(--black, #0A0A0A)', borderRadius: 999, justifyContent: 'flex-start', alignItems: 'center', display: 'flex'}}>
@@ -212,7 +205,6 @@ export default function Projects() {
                 </div>
             </div>
 
-            {/* Card 4 */}
             <div style={{width: 520, padding: 24, background: 'var(--bg-card, white)', boxShadow: '0px 4px 12px -2px rgba(15, 15, 20, 0.08)', borderRadius: 16, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
                 <div style={{alignSelf: 'stretch', justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex'}}>
                     <div style={{paddingLeft: 10, paddingRight: 10, paddingTop: 4, paddingBottom: 4, background: 'var(--black, #0A0A0A)', borderRadius: 999, justifyContent: 'flex-start', alignItems: 'center', display: 'flex'}}>
