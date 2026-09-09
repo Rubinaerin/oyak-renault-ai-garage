@@ -219,9 +219,9 @@ export default function Home() {
                     </div>
                 </div>
                 <div style={{width: 200, flexShrink: 0, marginLeft: 'auto', alignSelf: 'stretch', position: 'relative', background: 'linear-gradient(180deg, #F7F7FA 0%, #E5E5EB 100%)', overflow: 'hidden', justifyContent: 'center', alignItems: 'flex-end', display: 'flex'}}>
-                    <div style={{width: 150, height: 38, left: 25, top: 344, position: 'absolute', opacity: 0.90, background: 'var(--black-800, #1A1A1A)', borderRadius: 9999}} />
-                    <div style={{width: 150, height: 38, left: 25, top: 340, position: 'absolute', borderRadius: 9999, border: '3px var(--brand-yellow, #FFD400) solid'}} />
-                    <div data-outfit="Yellow Jacket" style={{width: 188, height: 242, left: 6, top: 140, position: 'absolute'}}>
+                    <div style={{width: 150, maxWidth: '100%', height: 38, left: '50%', transform: 'translateX(-50%)', top: 344, position: 'absolute', opacity: 0.90, background: 'var(--black-800, #1A1A1A)', borderRadius: 9999}} />
+                    <div style={{width: 150, maxWidth: '100%', height: 38, left: '50%', transform: 'translateX(-50%)', top: 340, position: 'absolute', borderRadius: 9999, border: '3px var(--brand-yellow, #FFD400) solid'}} />
+                    <div data-outfit="Yellow Jacket" style={{width: 188, height: 242, left: '50%', transform: 'translateX(-50%)', top: 140, position: 'absolute'}}>
                         <div style={{width: 115.49, height: 21.51, left: 36.26, top: 212.42, position: 'absolute', opacity: 0.10, background: 'black'}} />
                         <div style={{width: 16.11, height: 47.06, left: 75.20, top: 168.06, position: 'absolute', background: '#1A1A1A'}} />
                         <div style={{width: 16.11, height: 47.06, left: 96.69, top: 168.06, position: 'absolute', background: '#1A1A1A'}} />

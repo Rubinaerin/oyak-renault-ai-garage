@@ -140,7 +140,8 @@ export default function App() {
   }
 
   if(props['data-outfit']) {
-   return <Avatar key={key} width={style.width} height={style.height} style={{position:style.position,left:style.left,top:style.top}}/>;
+   const {width,height,...position}=style;
+   return <Avatar key={key} width={width} height={height} style={{...position,maxWidth:'100%',height:'auto'}}/>;
   }
 
   if(isFlagBox(style,children) && ctx.country) {
@@ -159,7 +160,8 @@ export default function App() {
   }
 
   const action=!ctx.parentAction && actions[label];
-  const frozen=ctx.frozen || (style.position==='relative' && hasAbsoluteChild(children));
+  const isTable=!!props['data-table'];
+  const frozen=ctx.frozen || isTable || (style.position==='relative' && hasAbsoluteChild(children));
   const nextStyle=fluid(style,breakpoint,ctx.rowChild,frozen);
   const childCtx={
    parentAction: ctx.parentAction || !!action,
@@ -170,7 +172,9 @@ export default function App() {
   };
   const descendants=React.Children.map(children,(child,i)=>enhance(child,`${key}.${i}`,childCtx));
   if(action) return <button key={key} type="button" onClick={action} style={nextStyle} className="export-action">{descendants}</button>;
-  return React.cloneElement(node,{...props,key,style:nextStyle},descendants);
+  const element=React.cloneElement(node,{...props,style:nextStyle},descendants);
+  if(isTable) return <div key={key} className="table-scroll" tabIndex={0} role="region" aria-label="Leaderboard table, scroll horizontally">{element}</div>;
+  return React.cloneElement(element,{key});
  }
 
  const Screen=screens[route];

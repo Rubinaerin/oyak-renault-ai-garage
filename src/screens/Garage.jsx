@@ -86,9 +86,9 @@ export default function Garage() {
         <div style={{alignSelf: 'stretch', overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 24, display: 'inline-flex'}}>
             <div style={{width: 400, overflow: 'hidden', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 16, display: 'inline-flex'}}>
                 <div style={{alignSelf: 'stretch', height: 380, position: 'relative', background: 'linear-gradient(180deg, #FCFCFC 0%, #E5E5EB 100%)', overflow: 'hidden', borderRadius: 20, outline: '1px var(--border-default, #E4E4E7) solid', outlineOffset: '-1px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', display: 'flex'}}>
-                    <div style={{width: 240, height: 64, left: 80, top: 286, position: 'absolute', background: 'var(--black-800, #1A1A1A)', borderRadius: 9999}} />
-                    <div style={{width: 240, height: 64, left: 80, top: 280, position: 'absolute', borderRadius: 9999, border: '3px var(--brand-yellow, #FFD400) solid'}} />
-                    <div data-outfit="Yellow Jacket" style={{width: 250, height: 322, left: 75, top: 20, position: 'absolute'}}>
+                    <div style={{width: 240, maxWidth: '100%', height: 64, left: '50%', transform: 'translateX(-50%)', top: 286, position: 'absolute', background: 'var(--black-800, #1A1A1A)', borderRadius: 9999}} />
+                    <div style={{width: 240, maxWidth: '100%', height: 64, left: '50%', transform: 'translateX(-50%)', top: 280, position: 'absolute', borderRadius: 9999, border: '3px var(--brand-yellow, #FFD400) solid'}} />
+                    <div data-outfit="Yellow Jacket" style={{width: 250, height: 322, left: '50%', transform: 'translateX(-50%)', top: 20, position: 'absolute'}}>
                         <div style={{width: 153.57, height: 28.62, left: 48.21, top: 282.64, position: 'absolute', opacity: 0.10, background: 'black'}} />
                         <div style={{width: 21.43, height: 62.61, left: 100, top: 223.61, position: 'absolute', background: '#1A1A1A'}} />
                         <div style={{width: 21.43, height: 62.61, left: 128.57, top: 223.61, position: 'absolute', background: '#1A1A1A'}} />
