@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Home as HomeIcon, Target, Users, Trophy, Warehouse, Calendar, Star, Bell, Clock, Play, Heart, ChevronRight, Sparkles, Search, Check, ArrowLeft, Copy, Lock, X, Plus, Menu } from 'lucide-react';
+import { RenaultLogo, Flag, Avatar, Initials } from './components/graphics';
 import Home from './screens/Home';
 import Missions from './screens/Missions';
 import MissionDetail from './screens/MissionDetail';
@@ -13,8 +14,83 @@ const screens = { home: Home, missions: Missions, 'mission-detail': MissionDetai
 const navigation = [['home','Home',HomeIcon],['missions','Missions',Target],['community','Community',Users],['leaderboard','Leaderboard',Trophy],['garage','My Garage',Warehouse],['events','Events',Calendar]];
 const icons = {home:HomeIcon, missions:Target, community:Users, leaderboard:Trophy, garage:Warehouse, events:Calendar, star:Star, target:Target, bell:Bell, clock:Clock, play:Play, heart:Heart, chevronRight:ChevronRight, users:Users, trophy:Trophy, sparkle:Sparkles, search:Search, check:Check, arrowLeft:ArrowLeft, copy:Copy, lock:Lock, close:X, plus:Plus};
 const promptText = 'You are my meeting assistant. Turn the notes below into an action list. For each item give: owner, task, due date. Group by owner. Flag anything with no owner.\n\nNotes: """ <paste your notes here> """';
+const countries = ['Türkiye','France','Romania','India','Colombia'];
+const people = ['Amélie Laurent','Mert Demir','Ana Popescu','Rahul Nair','Camila Rojas','Sofia Marin','Deniz Yılmaz'];
+
 const textOf = node => typeof node === 'string' || typeof node === 'number' ? String(node) : React.isValidElement(node) ? React.Children.toArray(node.props.children).map(textOf).join(' ').trim() : '';
 const getRoute = () => location.hash.slice(1) in screens ? location.hash.slice(1) : 'home';
+// Metinde tek bir ülke/kişi geçiyorsa onu alt ağaca aktarıyoruz; birden fazlaysa
+// üst kapsayıcıdır, yanlış eşleşmemesi için devralınan değer korunur.
+const onlyMatch = (list, text, inherited) => {
+ const hits = list.filter(item => text.includes(item));
+ return hits.length === 1 ? hits[0] : inherited;
+};
+
+// Figma ikonları vektör yerine "outline" verilmiş dikdörtgenler olarak geldi.
+// Lucide ikonuna geçerken tasarımdaki rengi bu outline değerinden okuyoruz.
+const outlineColor = node => {
+ for (const child of React.Children.toArray(node.props.children)) {
+  const outline = React.isValidElement(child) ? child.props.style?.outline : null;
+  if (typeof outline !== 'string') continue;
+  const token = outline.match(/var\((--[\w-]+),\s*([^)]+)\)/);
+  if (token) return `var(${token[1]}, ${token[2].trim()})`;
+  const hex = outline.match(/#[0-9a-fA-F]{3,8}/);
+  if (hex) return hex[0];
+ }
+ return 'currentColor';
+};
+
+const isRowStyle = style => typeof style.display === 'string' && style.display.includes('flex') && style.flexDirection !== 'column';
+const hasAbsoluteChild = children => React.Children.toArray(children).some(child => React.isValidElement(child) && child.props.style?.position === 'absolute');
+const isFlagBox = (style, children) => React.Children.count(children) === 0 && style.borderRadius === 3
+ && typeof style.width === 'number' && style.width >= 20 && style.width <= 26
+ && typeof style.height === 'number' && style.height >= 14 && style.height <= 18;
+const isAvatarCircle = (style, children) => React.Children.count(children) === 0 && style.borderRadius === 9999
+ && typeof style.width === 'number' && style.width >= 24 && style.width <= 44 && style.width === style.height;
+
+/* Export'un sabit piksel düzenini akışkan hale getirir.
+   wide: tasarımın birebir hali. narrow/mobile: satırlar sarar, sabit
+   genişlikler esner, mobilde kenar boşlukları ve başlıklar küçülür. */
+const fluid = (style, breakpoint, rowChild, frozen) => {
+ const s = {...style};
+ if (s.height === '100%') s.height = 'auto';
+ // Export her kutuya overflow:hidden basıyor; sabit yüksekliği olmayanlarda metni kırpıyor.
+ if (s.overflow === 'hidden' && typeof s.height !== 'number') delete s.overflow;
+ if (frozen || breakpoint === 'wide') return s;
+
+ if (isRowStyle(s) && (s.gap >= 12 || s.alignSelf === 'stretch')) s.flexWrap = 'wrap';
+ // Sabit yüksekliği olan büyük bloklar, satır sardığında içerikle birlikte büyüsün.
+ if (typeof s.height === 'number' && s.height >= 200) { s.minHeight = s.height; delete s.height; }
+ if (rowChild) {
+  if (s.flex === '1 1 0') s.flex = '1 1 280px';
+  else if (typeof s.width === 'number' && s.width >= 240) { delete s.width; s.flex = '1 1 280px'; s.maxWidth = '100%'; }
+ }
+ if (breakpoint === 'mobile') {
+  for (const side of ['paddingLeft','paddingRight']) if (typeof s[side] === 'number' && s[side] > 20) s[side] = 20;
+  if (typeof s.paddingTop === 'number' && s.paddingTop > 28) s.paddingTop = 28;
+  if (typeof s.fontSize === 'number' && s.fontSize >= 32) { s.fontSize = 24; s.lineHeight = '30px'; }
+  if (typeof s.width === 'number' && s.width >= 200) { s.width = '100%'; s.maxWidth = '100%'; }
+ }
+ return s;
+};
+
+const readBreakpoint = () => typeof matchMedia !== 'function' ? 'wide'
+ : matchMedia('(max-width: 800px)').matches ? 'mobile'
+ : matchMedia('(max-width: 1200px)').matches ? 'narrow' : 'wide';
+
+const useBreakpoint = () => {
+ const [breakpoint, setBreakpoint] = useState(readBreakpoint);
+ useEffect(() => {
+  const narrow = matchMedia('(max-width: 1200px)');
+  const mobile = matchMedia('(max-width: 800px)');
+  const update = () => setBreakpoint(readBreakpoint());
+  update();
+  narrow.addEventListener('change', update);
+  mobile.addEventListener('change', update);
+  return () => { narrow.removeEventListener('change', update); mobile.removeEventListener('change', update); };
+ }, []);
+ return breakpoint;
+};
 
 export default function App() {
  const [route,setRoute] = useState(getRoute);
@@ -23,6 +99,7 @@ export default function App() {
  const [reflection,setReflection] = useState('');
  const [completed,setCompleted] = useState(false);
  const [notice,setNotice] = useState('');
+ const breakpoint = useBreakpoint();
  const dialog = useRef(null);
  const noticeTimer = useRef(null);
  const scrollArea = useRef(null);
@@ -39,48 +116,76 @@ export default function App() {
   'Copy prompt':async()=>{try{await navigator.clipboard.writeText(promptText);notify('Prompt copied.');}catch{notify('Clipboard unavailable. Select and copy the example prompt.');}},
   'Complete Mission':()=>{if(!result.trim()){notify('Paste your action list before completing the mission.');document.getElementById('mission-result')?.focus();return;}setCompleted(true);dialog.current.showModal();},
   'View Reward':()=>{dialog.current.close();go('garage');notify('Racing gloves unlocked in this demo session.');},
-  'Save Avatar':()=>notify('The exported avatar is a static illustration; customization needs the original avatar assets.'),
+  'Save Avatar':()=>notify('Avatar customization is a prototype view; selections are not stored.'),
   'Redeem':()=>notify('Prototype reward store — no points deducted and no purchase made.'),
   'Ask a Question':()=>notify('Community posts are sample content. Posting requires a connected backend.'),
   'Share a Use Case':()=>notify('Community posts are sample content. Posting requires a connected backend.'),
  };
 
- function enhance(node,key='root',parentAction=false) {
+ function enhance(node,key='root',ctx={}) {
   if(!React.isValidElement(node)) {
    if(completed && node==='2,450 XP') return '2,480 XP';
    return node;
   }
   const {children,style={},...props}=node.props;
   const label=textOf(node);
+
   const Icon=icons[props['data-name']];
   if(Icon) {
-   const icon=<Icon key={key} size={style.width||20} aria-hidden="true" style={{flexShrink:0,color:'inherit'}}/>;
+   const icon=<Icon key={key} size={style.width||20} aria-hidden="true" style={{flexShrink:0,color:outlineColor(node)}}/>;
    if(props['data-name']==='close') return <button key={key} className="icon-button" aria-label="Close reward" onClick={()=>dialog.current.close()}>{icon}</button>;
    return icon;
   }
-  // Exported placeholders become actual controlled form fields.
+  // Export'ta avatar, köşe yarıçapını kaybetmiş dikdörtgen yığınıydı; SVG ile değiştiriliyor.
+  if(props['data-outfit']) {
+   return <Avatar key={key} width={style.width} height={style.height} style={{position:style.position,left:style.left,top:style.top}}/>;
+  }
+  // Gri/sarı bayrak placeholder'ları gerçek ülke bayraklarına dönüşüyor.
+  if(isFlagBox(style,children) && ctx.country) {
+   return <Flag key={key} country={ctx.country} width={style.width} height={style.height}/>;
+  }
+  // Boş avatar daireleri, yanındaki isimden baş harf alıyor.
+  if(isAvatarCircle(style,children) && ctx.person) {
+   return <span key={key} style={{...style,display:'inline-flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+    <Initials name={ctx.person} size={style.width}/>
+   </span>;
+  }
+  // Export'taki metin placeholder'ları gerçek form alanı oluyor.
   if(label==='Paste your action list here…' || label==='A sentence or two is plenty…') {
    const isResult=label.startsWith('Paste');
    return <textarea key={key} id={isResult?'mission-result':'mission-reflection'} aria-label={isResult?'Your action list':'Reflection'} placeholder={label} value={isResult?result:reflection} onChange={e=>(isResult?setResult:setReflection)(e.target.value)} rows={isResult?5:3}/>;
   }
-  const action=!parentAction && actions[label];
-  const descendants=React.Children.map(children,(child,i)=>enhance(child,`${key}.${i}`,parentAction||!!action));
-  if(action) return <button key={key} type="button" onClick={action} style={style} className="export-action">{descendants}</button>;
-  return React.cloneElement(node,{...props,key,style},descendants);
+
+  const action=!ctx.parentAction && actions[label];
+  const frozen=ctx.frozen || (style.position==='relative' && hasAbsoluteChild(children));
+  const nextStyle=fluid(style,breakpoint,ctx.rowChild,frozen);
+  const childCtx={
+   parentAction: ctx.parentAction || !!action,
+   rowChild: isRowStyle(style),
+   frozen,
+   country: onlyMatch(countries,label,ctx.country),
+   person: onlyMatch(people,label,ctx.person),
+  };
+  const descendants=React.Children.map(children,(child,i)=>enhance(child,`${key}.${i}`,childCtx));
+  if(action) return <button key={key} type="button" onClick={action} style={nextStyle} className="export-action">{descendants}</button>;
+  return React.cloneElement(node,{...props,key,style:nextStyle},descendants);
  }
 
  const Screen=screens[route];
  const exported=Screen();
- // Every supplied page repeats the sidebar. Use one accessible shared navigation.
+ // Her sayfa kendi sidebar'ını tekrar ediyor; tek ve erişilebilir menü kullanıyoruz.
  const content=React.Children.toArray(exported.props.children).slice(1);
  const success=MissionSuccess();
  const successContent=React.Children.toArray(success.props.children).slice(1);
  return <>
   <a className="skip-link" href="#main-content" onClick={e=>{e.preventDefault();document.getElementById('main-content').focus();}}>Skip to content</a>
-  <header className="mobile-bar"><strong>AI GARAGE</strong><button className="icon-button" onClick={()=>setMenu(!menu)} aria-label="Toggle navigation" aria-expanded={menu}><Menu/></button></header>
+  <header className="mobile-bar">
+   <span className="mobile-brand"><RenaultLogo size={20}/> AI GARAGE</span>
+   <button className="icon-button" onClick={()=>setMenu(!menu)} aria-label="Toggle navigation" aria-expanded={menu}><Menu/></button>
+  </header>
   <div className="app-shell">
    <aside className={`sidebar ${menu?'is-open':''}`}>
-    <a className="brand" href="#home"><span className="brand-mark">◇</span> AI GARAGE</a>
+    <a className="brand" href="#home"><RenaultLogo size={26}/> AI GARAGE</a>
     <nav aria-label="Main navigation">{navigation.map(([id,label,Icon])=><a href={`#${id}`} key={id} aria-current={route===id || (id==='missions'&&route==='mission-detail')?'page':undefined}><Icon size={22}/><span>{label}</span></a>)}</nav>
     <div className="sidebar-footer">Renault GBS · Concept</div>
    </aside>
