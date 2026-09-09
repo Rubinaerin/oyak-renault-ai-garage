@@ -1,4 +1,3 @@
-// Converted from the supplied Figma JSX export.
 export default function MissionSuccess() {
  return (
 <div style={{width: '100%', height: '100%', position: 'relative', background: 'var(--bg-page, #F7F7F8)', overflow: 'hidden', justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}>

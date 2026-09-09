@@ -1,4 +1,3 @@
-// Converted from the supplied Figma JSX export.
 export default function MissionDetail() {
  return (
 <div style={{width: '100%', height: '100%', background: 'var(--bg-page, #F7F7F8)', overflow: 'hidden', justifyContent: 'flex-start', alignItems: 'flex-start', display: 'inline-flex'}}>
