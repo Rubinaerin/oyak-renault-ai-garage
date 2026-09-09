@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Home as HomeIcon, Target, Users, Trophy, Warehouse, Calendar, Star, Bell, Clock, Play, Heart, ChevronRight, Sparkles, Search, Check, ArrowLeft, Copy, Lock, X, Plus, Menu } from 'lucide-react';
+import { Home as HomeIcon, Target, Users, Trophy, Warehouse, Calendar, Star, Bell, Clock, Play, Heart, ChevronRight, Sparkles, Search, Check, ArrowLeft, Copy, Lock, X, Plus, Menu, GitFork, BookOpen } from 'lucide-react';
 import Home from './screens/Home';
 import Missions from './screens/Missions';
 import MissionDetail from './screens/MissionDetail';
@@ -8,10 +8,12 @@ import Garage from './screens/Garage';
 import Community from './screens/Community';
 import Leaderboard from './screens/Leaderboard';
 import Events from './screens/Events';
+import Projects from './screens/Projects';
+import Learning from './screens/Learning';
 
-const screens = { home: Home, missions: Missions, 'mission-detail': MissionDetail, garage: Garage, community: Community, leaderboard: Leaderboard, events: Events };
-const navigation = [['home','Home',HomeIcon],['missions','Missions',Target],['community','Community',Users],['leaderboard','Leaderboard',Trophy],['garage','My Garage',Warehouse],['events','Events',Calendar]];
-const icons = {home:HomeIcon, missions:Target, community:Users, leaderboard:Trophy, garage:Warehouse, events:Calendar, star:Star, target:Target, bell:Bell, clock:Clock, play:Play, heart:Heart, chevronRight:ChevronRight, users:Users, trophy:Trophy, sparkle:Sparkles, search:Search, check:Check, arrowLeft:ArrowLeft, copy:Copy, lock:Lock, close:X, plus:Plus};
+const screens = { home: Home, missions: Missions, 'mission-detail': MissionDetail, garage: Garage, community: Community, leaderboard: Leaderboard, events: Events, projects: Projects, learning: Learning };
+const navigation = [['home','Home',HomeIcon],['missions','Missions',Target],['community','Community',Users],['leaderboard','Leaderboard',Trophy],['learning','Learning',BookOpen],['garage','My Garage',Warehouse],['events','Events',Calendar],['projects','Projects',GitFork]];
+const icons = {home:HomeIcon, missions:Target, community:Users, leaderboard:Trophy, garage:Warehouse, events:Calendar, projects:GitFork, learning:BookOpen, star:Star, target:Target, bell:Bell, clock:Clock, play:Play, heart:Heart, chevronRight:ChevronRight, users:Users, trophy:Trophy, sparkle:Sparkles, search:Search, check:Check, arrowLeft:ArrowLeft, copy:Copy, lock:Lock, close:X, plus:Plus, gitfork:GitFork};
 const promptText = 'You are my meeting assistant. Turn the notes below into an action list. For each item give: owner, task, due date. Group by owner. Flag anything with no owner.\n\nNotes: """ <paste your notes here> """';
 const textOf = node => typeof node === 'string' || typeof node === 'number' ? String(node) : React.isValidElement(node) ? React.Children.toArray(node.props.children).map(textOf).join(' ').trim() : '';
 const getRoute = () => location.hash.slice(1) in screens ? location.hash.slice(1) : 'home';
@@ -43,6 +45,10 @@ export default function App() {
   'Redeem':()=>notify('Prototype reward store — no points deducted and no purchase made.'),
   'Ask a Question':()=>notify('Community posts are sample content. Posting requires a connected backend.'),
   'Share a Use Case':()=>notify('Community posts are sample content. Posting requires a connected backend.'),
+  'Submit a Project':()=>notify('Project submissions require a connected backend.'),
+  'View on GitHub':()=>notify('This is a demo project — no real repository is linked.'),
+  'Watch Video':()=>notify('Video tutorials will open in the learning platform — no URL linked in this demo.'),
+  'Rewatch':()=>notify('Video tutorials will open in the learning platform — no URL linked in this demo.'),
  };
 
  function enhance(node,key='root',parentAction=false) {
