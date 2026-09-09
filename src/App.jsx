@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Home as HomeIcon, Target, Users, Trophy, Warehouse, Calendar, Star, Bell, Clock, Play, Heart, ChevronRight, Sparkles, Search, Check, ArrowLeft, Copy, Lock, X, Plus, Menu, GitFork, BookOpen } from 'lucide-react';
 import { RenaultLogo, Flag, Avatar, Initials } from './components/graphics';
+import { Customizer, Equipped } from './components/Customizer';
 import Home from './screens/Home';
 import Missions from './screens/Missions';
 import MissionDetail from './screens/MissionDetail';
@@ -18,6 +19,7 @@ const icons = {home:HomeIcon, missions:Target, community:Users, leaderboard:Trop
 const promptText = 'You are my meeting assistant. Turn the notes below into an action list. For each item give: owner, task, due date. Group by owner. Flag anything with no owner.\n\nNotes: """ <paste your notes here> """';
 const countries = ['Türkiye','France','Romania','India','Colombia'];
 const people = ['Amélie Laurent','Mert Demir','Ana Popescu','Rahul Nair','Camila Rojas','Sofia Marin','Deniz Yılmaz'];
+const eventNames = ['AI Summit 2026','AI Agent Hackathon','AI Coffee Chat','Show & Tell: Reporting','Microsoft Copilot Training'];
 
 const textOf = node => typeof node === 'string' || typeof node === 'number' ? String(node) : React.isValidElement(node) ? React.Children.toArray(node.props.children).map(textOf).join(' ').trim() : '';
 const getRoute = () => location.hash.slice(1) in screens ? location.hash.slice(1) : 'home';
@@ -95,14 +97,52 @@ export default function App() {
  const [reflection,setReflection] = useState('');
  const [completed,setCompleted] = useState(false);
  const [notice,setNotice] = useState('');
+ const [look,setLook] = useState({hair:'Tousled',skin:'Medium',outfit:'Renault yellow jacket',shoes:'Yellow-trim sneakers',accessories:[]});
+ const [registered,setRegistered] = useState(() => new Set());
  const breakpoint = useBreakpoint();
  const dialog = useRef(null);
  const noticeTimer = useRef(null);
  const scrollArea = useRef(null);
  const notify = message => { clearTimeout(noticeTimer.current); setNotice(message); noticeTimer.current=setTimeout(()=>setNotice(''),4500); };
- useEffect(()=>{const change=()=>{setRoute(getRoute());setMenu(false);scrollArea.current?.scrollTo(0,0);};addEventListener('hashchange',change);return()=>{removeEventListener('hashchange',change);clearTimeout(noticeTimer.current);};},[]);
+ useEffect(()=>{const change=()=>{setRoute(getRoute());setMenu(false);scrollArea.current?.scrollTo({top:0,behavior:'instant'});};addEventListener('hashchange',change);return()=>{removeEventListener('hashchange',change);clearTimeout(noticeTimer.current);};},[]);
  useEffect(()=>{document.title=`${navigation.find(([id])=>id===route)?.[1] || 'Mission detail'} · AI Garage`;},[route]);
+
+ useEffect(()=>{
+  const column=scrollArea.current?.querySelector('.screen-content > div');
+  const sections=column?Array.from(column.children):[];
+  if(!sections.length) return;
+  sections.forEach((el,i)=>{
+   el.classList.add('reveal');
+   el.style.transitionDelay=Math.min(i*70,420)+'ms';
+  });
+  void column.offsetHeight;
+  const show=el=>el.classList.add('reveal-in');
+  let observer;
+  if(typeof IntersectionObserver==='function') {
+   observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting) { show(entry.target); observer.unobserve(entry.target); } });
+   },{root:scrollArea.current,rootMargin:'0px 0px -6% 0px',threshold:0.04});
+   sections.forEach(el=>observer.observe(el));
+  } else {
+   sections.forEach(show);
+  }
+  const fallback=setTimeout(()=>{
+   sections.forEach(el=>{ if(el.getBoundingClientRect().top<innerHeight) show(el); });
+  },1200);
+  return ()=>{
+   clearTimeout(fallback);
+   observer?.disconnect();
+   sections.forEach(el=>{ el.classList.remove('reveal','reveal-in'); el.style.transitionDelay=''; });
+  };
+ },[route,breakpoint]);
+
  const go = next => { location.hash=next; };
+ const selectPart = (slot,value) => { setLook(prev=>({...prev,[slot]:value})); notify(`${value} equipped.`); };
+ const toggleAccessory = name => setLook(prev=>{
+  const on=prev.accessories.includes(name);
+  notify(on?`${name} removed.`:`${name} equipped.`);
+  return {...prev,accessories:on?prev.accessories.filter(item=>item!==name):[...prev.accessories,name]};
+ });
  const actions = {
   'Start Mission':()=>go('mission-detail'), 'Continue':()=>go('mission-detail'),
   'Start':()=>notify('Only the meeting-notes mission has a supplied detail screen. Open Continue to try it.'),
@@ -112,7 +152,7 @@ export default function App() {
   'Copy prompt':async()=>{try{await navigator.clipboard.writeText(promptText);notify('Prompt copied.');}catch{notify('Clipboard unavailable. Select and copy the example prompt.');}},
   'Complete Mission':()=>{if(!result.trim()){notify('Paste your action list before completing the mission.');document.getElementById('mission-result')?.focus();return;}setCompleted(true);dialog.current.showModal();},
   'View Reward':()=>{dialog.current.close();go('garage');notify('Racing gloves unlocked in this demo session.');},
-  'Save Avatar':()=>notify('Avatar customization is a prototype view; selections are not stored.'),
+  'Save Avatar':()=>notify(`Avatar saved for this session — ${look.hair}, ${look.skin} skin, ${look.outfit}.`),
   'Redeem':()=>notify('Prototype reward store — no points deducted and no purchase made.'),
   'Ask a Question':()=>notify('Community posts are sample content. Posting requires a connected backend.'),
   'Share a Use Case':()=>notify('Community posts are sample content. Posting requires a connected backend.'),
@@ -141,7 +181,12 @@ export default function App() {
 
   if(props['data-outfit']) {
    const {width,height,...position}=style;
-   return <Avatar key={key} width={width} height={height} style={{...position,maxWidth:'100%',height:'auto'}}/>;
+   return <Avatar key={key} width={width} height={height} {...look} style={{...position,maxWidth:'100%',height:'auto'}}/>;
+  }
+
+  if(props['data-panel']==='equipped') return <Equipped key={key} {...look}/>;
+  if(props['data-panel']==='customizer') {
+   return <Customizer key={key} {...look} onSelect={selectPart} onToggleAccessory={toggleAccessory}/>;
   }
 
   if(isFlagBox(style,children) && ctx.country) {
@@ -169,8 +214,25 @@ export default function App() {
    frozen,
    country: onlyMatch(countries,label,ctx.country),
    person: onlyMatch(people,label,ctx.person),
+   event: onlyMatch(eventNames,label,ctx.event),
   };
   const descendants=React.Children.map(children,(child,i)=>enhance(child,`${key}.${i}`,childCtx));
+
+  if(route==='events' && ctx.event && (label==='Join' || label==='Register')) {
+   const done=registered.has(ctx.event);
+   const large=label==='Register';
+   return (
+    <button key={key} type="button" disabled={done}
+     onClick={()=>{setRegistered(prev=>new Set(prev).add(ctx.event));notify(`Registered for ${ctx.event}.`);}}
+     className={`export-action${done?' is-registered':''}`}
+     style={{...nextStyle,background:done?'var(--bg-card-alt, #F1F1F3)':nextStyle.background,color:done?'var(--text-secondary, #6B6B70)':undefined}}>
+     {done
+      ? <><Check size={large?18:16} aria-hidden="true"/><span style={{fontSize:large?16:14,fontFamily:'Inter',fontWeight:600,letterSpacing:0.03}}>Registered</span></>
+      : descendants}
+    </button>
+   );
+  }
+
   if(action) return <button key={key} type="button" onClick={action} style={nextStyle} className="export-action">{descendants}</button>;
   const element=React.cloneElement(node,{...props,style:nextStyle},descendants);
   if(isTable) return <div key={key} className="table-scroll" tabIndex={0} role="region" aria-label="Leaderboard table, scroll horizontally">{element}</div>;
@@ -197,7 +259,7 @@ export default function App() {
    </aside>
    <main id="main-content" tabIndex={-1} ref={scrollArea}>
     {completed && route==='garage' && <div className="reward-banner"><Check size={18}/> Racing gloves unlocked · +30 XP earned this session</div>}
-    <div className={`screen-content screen-${route}`}>{content.map((child,i)=>enhance(child,String(i)))}</div>
+    <div key={route} className={`screen-content screen-${route}`}>{content.map((child,i)=>enhance(child,String(i)))}</div>
    </main>
   </div>
   <dialog ref={dialog} aria-label="Mission completed" className="success-dialog">{successContent.map((child,i)=>enhance(child,`success-${i}`))}</dialog>

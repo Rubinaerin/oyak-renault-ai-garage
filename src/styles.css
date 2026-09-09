@@ -80,7 +80,31 @@ button:hover { filter: brightness(.96); }
 .sidebar nav a[aria-current] { background: var(--brand-yellow); color: var(--black); }
 .sidebar-footer { margin-top: auto; color: var(--text-on-dark-muted); font-size: 11px; font-weight: 500; line-height: 16px; }
 
-main { min-width: 0; flex: 1; overflow: auto; height: 100vh; }
+main { min-width: 0; flex: 1; overflow: auto; height: 100vh; scroll-behavior: smooth; }
+
+.screen-content { animation: screen-in .42s cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(12px) }
+  to { opacity: 1; transform: none }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22, .61, .36, 1);
+}
+.reveal-in { opacity: 1; transform: none; }
+
+.sidebar nav a { transition: background .18s ease, color .18s ease; }
+.export-action { transition: filter .18s ease, transform .12s ease, background .22s ease; }
+.export-action:active:not(:disabled) { transform: scale(.985); }
+
+.hair-option { background: transparent; }
+.hair-frame { transition: background .22s ease, outline-color .22s ease, transform .18s ease; }
+.hair-option:hover .hair-frame { transform: translateY(-2px); }
+
+.is-registered { animation: pop .34s cubic-bezier(.34, 1.56, .64, 1) both; }
+@keyframes pop { 0% { transform: scale(.9) } 60% { transform: scale(1.04) } 100% { transform: none } }
 
 .screen-content { min-width: 1104px; min-height: 100%; display: flex; align-items: flex-start; }
 .screen-content > div { width: 100%; min-width: 0; height: auto; }
@@ -143,4 +167,4 @@ textarea {
   .toast { bottom: 12px; }
 }
 
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
